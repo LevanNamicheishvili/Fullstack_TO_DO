@@ -76,11 +76,17 @@ if ($result->num_rows > 0) {
 <html>
 <head>
     <title>HOME</title>
+    <link rel="stylesheet" type="text/css" href="./styles/style.css?v= <?php echo time(); ?>" >
+
 </head>
 <body>
+     <header>
     <h1>Hello, <?php echo $_SESSION['user_name']; ?></h1>
     <a href="logout.php">Logout</a>
+    </header>
 
+
+   <main>
     <h2>To-Do List</h2>
     <ul>
         <?php 
@@ -103,5 +109,8 @@ if ($result->num_rows > 0) {
         <input type="hidden" name="delete_all" value="1">
         <button class="delete_btn" type="submit">Delete All Tasks</button>
     </form>
+    </main>
+
+
 </body>
 </html>

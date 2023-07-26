@@ -1,4 +1,4 @@
-*, 
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');*, 
 *::before, 
 *::after { 
     margin: 0;
@@ -7,22 +7,24 @@
     box-sizing: border-box;
 }
 body {
-    background: #25c189;
+  height: 100vh;
+  font-family: sans-serif;
+  }
+  .container { 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+  form {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    font-family: sans-serif;
-  }
-  
-  form {
     width: 500px;
-    border: 2px solid #ccc;
     padding: 30px;
     background: #fff;
-    border-radius: 15px;
-  }
+    height: 100vh;
+    align-items: stretch;
+    flex-direction: column;
+}
   
   h2 {
     text-align: center;
@@ -43,16 +45,15 @@ body {
     font-size: 18px;
     padding: 10px;
   }
-  
+  button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
   button, a {
-    float: right;
     background: #555;
     padding: 10px 15px;
     color: #fff;
     border-radius: 5px;
-    border: none;
-    margin-right: 10px;
-    text-decoration: none;
     cursor: pointer;
   }
   
@@ -74,3 +75,55 @@ body {
     color: #fff;
   }
   
+  .login-form { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .form_flex { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .choos_style { 
+    margin: 0 auto;
+  }
+
+  .left_side { 
+    background-color: black;
+    height: 100vh;
+    width: 100%;
+  }
+
+.wrapper {
+  height: 100vh;
+  /*This part is important for centering*/
+  display: grid;
+  place-items: center;
+  color: white;
+}
+
+.typing-demo {
+  width: 14ch;
+  animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 6em;
+
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
