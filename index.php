@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <form id="login-form" action="login.php" method="post">
@@ -19,14 +19,8 @@
         <button type="submit">Login</button>
         
         <!-- Signup Button -->
-        <button type="button" id="signup-button" class="signup-btn" onclick="goToSignup()">Sign Up</button> 
+        <button type="button" id="signup-button" class="signup-btn" >Sign Up</button> 
     </form>
-
-    <script>
-        // JavaScript function to navigate to signup page
-        function goToSignup() {
-            window.location.href = "signupform.php";
-        }
-    </script>
+<script src="./js/index.js"></script>
 </body>
 </html>
