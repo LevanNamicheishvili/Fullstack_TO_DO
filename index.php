@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="style.css?v= <?php echo time(); ?>" >
+    <link rel="stylesheet" type="text/css" href="./styles/style.css?v= <?php echo time(); ?>" >
 </head>
 <body>
     <form id="login-form" action="login.php" method="post">
