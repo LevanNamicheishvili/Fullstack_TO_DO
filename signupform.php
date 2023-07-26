@@ -5,6 +5,15 @@
     <link rel="stylesheet" type="text/css" href="./styles/style.css?v= <?php echo time(); ?>" >
 </head>
 <body>
+    <div class="container">
+    <div class="left_side">
+        <div class="wrapper">
+    <div class="typing-demo">
+      Just Do It ...
+    </div>
+</div>
+        </div>
+        <div class="rightside">
     <!-- Signup Form -->
     <form id="signup-form" action="signup.php" method="post">
         <h2>SIGN UP</h2>
@@ -23,6 +32,8 @@
 
         <button type="submit" name="signup" id="signup-button">Sign Up</button>
     </form>
+    </div>
+    </div>
 <script src="./js/signupf.js"></script>
 </body>
 </html>
