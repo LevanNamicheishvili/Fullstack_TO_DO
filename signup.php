@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "db_conn.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -21,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             // Check if the username is already taken
             $sql = "SELECT * FROM users WHERE user_name='$uname'";
-            $result = mysqli_query($conn, $sql);
+            $result = mysqli_query($conn, $sql); // $conn is the connection variable from db_conn.php
 
             if (mysqli_num_rows($result) > 0) {
                 header("Location: signup.php?signup_error=Username already taken. Please choose a different one.");
@@ -29,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 // Insert the new user into the database
                 $sql = "INSERT INTO users (user_name, password) VALUES ('$uname', '$pass')";
-                $result = mysqli_query($conn, $sql);
+                $result = mysqli_query($conn, $sql); // $conn is the connection variable from db_conn.php
 
                 if ($result) {
                     header("Location: index.php?signup_success=Signup successful. You can now login.");

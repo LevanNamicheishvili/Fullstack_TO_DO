@@ -24,4 +24,4 @@ function checkFormValidity() {
 }
 
 // Attach event listener to the form's onsubmit event
-signupForm.onsubmit = checkFormValidity;
+signupForm.onsubmit = checkFormValidity;    
