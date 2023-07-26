@@ -19,39 +19,14 @@
         <button type="submit">Login</button>
         
         <!-- Signup Button -->
-        <button type="button" id="signup-button" class="signup-btn">Sign Up</button> 
-    </form>
-
-    <!-- Signup Form -->
-    <form id="signup-form" action="signup.php" method="post" style="display: none;">
-        <h2>SIGN UP</h2>
-        <?php if (isset($_GET['signup_error'])) { ?>
-            <p class="error"><?php echo $_GET['signup_error']; ?></p>
-        <?php } ?>
-
-        <label>User Name</label>
-        <input type="text" name="uname" placeholder="Please enter your User Name">
-
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Please enter yout Password">
-
-        <button type="submit">Sign Up</button>
+        <button type="button" id="signup-button" class="signup-btn" onclick="goToSignup()">Sign Up</button> 
     </form>
 
     <script>
-        // Get references to the login and signup forms
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const signupButton = document.getElementById('signup-button');
-
-        // Function to toggle visibility of forms
-        function toggleForms() {
-            loginForm.style.display = (loginForm.style.display === 'none') ? 'block' : 'none';
-            signupForm.style.display = (signupForm.style.display === 'none') ? 'block' : 'none';
+        // JavaScript function to navigate to signup page
+        function goToSignup() {
+            window.location.href = "signupform.php";
         }
-
-        // Attach click event to the signup button
-        signupButton.addEventListener('click', toggleForms);
     </script>
 </body>
 </html>
