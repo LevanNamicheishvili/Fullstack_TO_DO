@@ -12,15 +12,21 @@
 
 body { 
     padding: 27px;
-    background-color: #474343;
+    background-color: #000000;
 }
 
 header { 
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 20vh;
 }
-
+span { 
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 15%;
+}
 .logo { 
     display: flex;
     align-items: center;
@@ -63,4 +69,12 @@ header {
     text-align: center;
     font-size: 4rem;
   }
-
+  main { 
+    display: flex;
+    padding: 88px;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .leftside ul { 
+    color: white;
+  }

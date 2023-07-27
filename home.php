@@ -26,17 +26,25 @@ if ($conn->query($sql) === TRUE) {
 // Check if the user has submitted a new to-do item
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['task'])) {
     // Get the new task from the form
-    $newTask = htmlspecialchars(trim($_POST['task']));
+    $newTask = trim($_POST['task']);
 
-    // Add the new task to the 'tasks' table
+    // Add the new task to the 'tasks' table using prepared statements
     if (!empty($newTask)) {
         $userId = $_SESSION['id'];
-        $sql = "INSERT INTO tasks (user_id, task_description) VALUES ('$userId', '$newTask')";
-        if ($conn->query($sql) === TRUE) {
+        $sql = "INSERT INTO tasks (user_id, task_description) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $userId, $newTask);
+
+        if ($stmt->execute()) {
             // Task inserted successfully
+
+            // Redirect to refresh the page and prevent re-submitting the form on refresh
+            header("Location: home.php");
+            exit();
         } else {
-            echo "Error inserting task: " . $conn->error;
+            echo "Error inserting task: " . $stmt->error;
         }
+        $stmt->close();
     }
 }
 
@@ -57,10 +65,13 @@ if (isset($_POST['delete_all'])) {
     }
 }
 
-// Fetch the user's tasks from the 'tasks' table
+// Fetch the user's tasks from the 'tasks' table using prepared statements
 $userId = $_SESSION['id'];
-$sql = "SELECT * FROM tasks WHERE user_id='$userId'";
-$result = $conn->query($sql);
+$sql = "SELECT * FROM tasks WHERE user_id=?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // Initialize the to-do list array
 $todoList = [];
@@ -84,23 +95,13 @@ if ($result->num_rows > 0) {
             <img src="./images/hacker.png" alt="logo">
             <p>Hello, <?php echo $_SESSION['user_name']; ?></p>
         </div>
+        <span>To Do App</span>
         <div class="logoutdiv">
             <a href="logout.php">Logout</a>
         </div>
     </header>
     <main>
         <div class="leftside">
-            <ul>
-                <?php 
-                // Display the user's tasks with numbering
-                $taskNumber = 1;
-                foreach ($todoList as $task) {
-                    echo "<li>{$taskNumber}. {$task}</li>";
-                    $taskNumber++;
-                }
-                ?>
-            </ul>
-
             <form action="home.php" method="post">
                 <input type="text" name="task" placeholder="Enter new task" required>
                 <button type="submit">Add Task</button>
@@ -111,6 +112,16 @@ if ($result->num_rows > 0) {
                 <input type="hidden" name="delete_all" value="1">
                 <button class="delete_btn" type="submit">Delete All Tasks</button>
             </form>
+            <ul>
+                <?php 
+                // Display the user's tasks with numbering
+                $taskNumber = 1;
+                foreach ($todoList as $task) {
+                    echo "<li>{$taskNumber}. {$task}</li>";
+                    $taskNumber++;
+                }
+                ?>
+            </ul>
         </div>
 
         <div class="rightside">
@@ -130,4 +141,3 @@ if ($result->num_rows > 0) {
     <script src="./js/home.js"></script>
 </body>
 </html>
-
