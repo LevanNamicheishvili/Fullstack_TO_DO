@@ -11,16 +11,22 @@
 }
 
 body { 
-    padding: 27px;
-    background-color: #474343;
+        padding: 27px;
+    background-color: #000000;
 }
 
 header { 
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 20vh;
 }
-
+span { 
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 15%;
+}
 .logo { 
     display: flex;
     align-items: center;
@@ -63,4 +69,40 @@ header {
     text-align: center;
     font-size: 4rem;
   }
+  main { 
+    display: flex;
+    padding: 88px;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .leftside ul { 
+    color: white;
+  }
 
+  .task_input { 
+    width: 359px;
+    height: 42px;
+    background: inherit;
+    border: 2px solid white;
+    color: white;
+  }
+.submit_btn { 
+    height: 42px;
+    width: 148px;
+}
+
+.taskplace { 
+    background-color: white;
+    width: 100%;
+    height: 388px;
+    padding: 33px 194px 20px
+}
+.delete_btn { 
+    width: 100%;
+    height: 40px;
+}
+
+ul li { 
+    font-size: 37px;
+    font-weight: 600;
+}
