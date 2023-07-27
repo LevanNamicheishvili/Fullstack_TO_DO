@@ -76,41 +76,58 @@ if ($result->num_rows > 0) {
 <html>
 <head>
     <title>HOME</title>
-    <link rel="stylesheet" type="text/css" href="./styles/style.css?v= <?php echo time(); ?>" >
-
+    <link rel="stylesheet" type="text/css" href="./styles/home.css?v=<?php echo time(); ?>">
 </head>
 <body>
-     <header>
-    <h1>Hello, <?php echo $_SESSION['user_name']; ?></h1>
-    <a href="logout.php">Logout</a>
+    <header>
+        <div class="logo"> 
+            <img src="./images/hacker.png" alt="logo">
+            <p>Hello, <?php echo $_SESSION['user_name']; ?></p>
+        </div>
+        <div class="logoutdiv">
+            <a href="logout.php">Logout</a>
+        </div>
     </header>
+    <main>
+        <div class="leftside">
+            <ul>
+                <?php 
+                // Display the user's tasks with numbering
+                $taskNumber = 1;
+                foreach ($todoList as $task) {
+                    echo "<li>{$taskNumber}. {$task}</li>";
+                    $taskNumber++;
+                }
+                ?>
+            </ul>
 
+            <form action="home.php" method="post">
+                <input type="text" name="task" placeholder="Enter new task" required>
+                <button type="submit">Add Task</button>
+            </form>
 
-   <main>
-    <h2>To-Do List</h2>
-    <ul>
-        <?php 
-        // Display the user's tasks with numbering
-        $taskNumber = 1;
-        foreach ($todoList as $task) {
-            echo "<li>{$taskNumber}. {$task}</li>";
-            $taskNumber++;
-        }
-        ?>
-    </ul>
+            <!-- Separate form for the delete all button -->
+            <form action="home.php" method="post">
+                <input type="hidden" name="delete_all" value="1">
+                <button class="delete_btn" type="submit">Delete All Tasks</button>
+            </form>
+        </div>
 
-    <form action="home.php" method="post">
-        <input type="text" name="task" placeholder="Enter new task" required>
-        <button type="submit">Add Task</button>
-    </form>
-
-    <!-- Separate form for the delete all button -->
-    <form action="home.php" method="post">
-        <input type="hidden" name="delete_all" value="1">
-        <button class="delete_btn" type="submit">Delete All Tasks</button>
-    </form>
+        <div class="rightside">
+            <div class='container'>
+                <div class='clock'>
+                    <div class='date'></div>
+                    <div class='hr'></div>
+                    <div class='colon'>:</div>
+                    <div class='min'></div>
+                    <div class='colon'>:</div>
+                    <div class='sec'></div>
+                </div>
+            </div>
+        </div>
     </main>
-
-
+    <!-- Link the JavaScript file -->
+    <script src="./js/home.js"></script>
 </body>
 </html>
+
