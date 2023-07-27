@@ -103,8 +103,8 @@ if ($result->num_rows > 0) {
     <main>
         <div class="leftside">
             <form action="home.php" method="post">
-                <input type="text" name="task" placeholder="Enter new task" required>
-                <button type="submit">Add Task</button>
+                <input type="text" name="task" placeholder="Enter new task" class="task_input" required>
+                <button type="submit" class="submit_btn">Add Task</button>
             </form>
 
             <!-- Separate form for the delete all button -->
@@ -112,16 +112,7 @@ if ($result->num_rows > 0) {
                 <input type="hidden" name="delete_all" value="1">
                 <button class="delete_btn" type="submit">Delete All Tasks</button>
             </form>
-            <ul>
-                <?php 
-                // Display the user's tasks with numbering
-                $taskNumber = 1;
-                foreach ($todoList as $task) {
-                    echo "<li>{$taskNumber}. {$task}</li>";
-                    $taskNumber++;
-                }
-                ?>
-            </ul>
+         
         </div>
 
         <div class="rightside">
@@ -136,7 +127,21 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
         </div>
+
     </main>
+    <div class="taskplace">
+    <ul>
+                <?php 
+                // Display the user's tasks with numbering
+                $taskNumber = 1;
+                foreach ($todoList as $task) {
+                    echo "<li>{$taskNumber}. {$task}</li>";
+                    $taskNumber++;
+                }
+                ?>
+            </ul>
+    </div>
+
     <!-- Link the JavaScript file -->
     <script src="./js/home.js"></script>
 </body>
