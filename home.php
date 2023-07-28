@@ -57,12 +57,45 @@ if (isset($_POST['delete_all'])) {
         $sql = "ALTER TABLE tasks AUTO_INCREMENT = 1";
         if ($conn->query($sql) === TRUE) {
             // Auto-increment ID reset successfully
+
+            // Redirect to refresh the page after resetting
+            header("Location: home.php");
+            exit();
         } else {
             echo "Error resetting ID: " . $conn->error;
         }
     } else {
         echo "Error deleting tasks: " . $conn->error;
     }
+}
+
+// Check if the user wants to delete an individual task
+if (isset($_POST['delete_task']) && isset($_POST['task_id'])) {
+    $taskId = $_POST['task_id'];
+
+    // Delete the task from the 'tasks' table using prepared statements
+    $sql = "DELETE FROM tasks WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $taskId);
+
+    if ($stmt->execute()) {
+        // Task deleted successfully
+
+        // Renumber the tasks and update IDs in the 'tasks' table
+        $sql = "SET @count = 0";
+        $conn->query($sql);
+        $sql = "UPDATE tasks SET tasks.id = @count:= @count + 1";
+        $conn->query($sql);
+        $sql = "ALTER TABLE tasks AUTO_INCREMENT = 1";
+        $conn->query($sql);
+
+        // Redirect back to the 'home.php' page to update the task list
+        header("Location: home.php");
+        exit();
+    } else {
+        echo "Error deleting task: " . $stmt->error;
+    }
+    $stmt->close();
 }
 
 // Fetch the user's tasks from the 'tasks' table using prepared statements
@@ -78,7 +111,13 @@ $todoList = [];
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $todoList[] = $row['task_description'];
+        $todoList[] = $row;
+    }
+} else {
+    // If no tasks are present, reset the auto-increment ID to 1
+    $sql = "ALTER TABLE tasks AUTO_INCREMENT = 1";
+    if ($conn->query($sql) === FALSE) {
+        echo "Error resetting ID: " . $conn->error;
     }
 }
 ?>
@@ -130,19 +169,24 @@ if ($result->num_rows > 0) {
 
     </main>
     <div class="taskplace">
-    <ul>
-                <?php 
-                // Display the user's tasks with numbering
-                $taskNumber = 1;
-                foreach ($todoList as $task) {
-                    echo "<li>{$taskNumber}. {$task}</li>";
-                    $taskNumber++;
-                }
-                ?>
-            </ul>
+        <ul>
+            <?php 
+            // Display the user's tasks with numbering and delete buttons
+            foreach ($todoList as $index => $task) {
+                $taskNumber = $index + 1;
+                echo "<li>{$taskNumber}. {$task['task_description']} 
+                    <form action='home.php' method='post' style='display:inline;'>
+                        <input type='hidden' name='task_id' value='{$task['id']}'>
+                        <button type='submit' name='delete_task'>Delete</button>
+                    </form>
+                </li>";
+            }
+            ?>
+        </ul>
     </div>
 
     <!-- Link the JavaScript file -->
     <script src="./js/home.js"></script>
 </body>
 </html>
+                
