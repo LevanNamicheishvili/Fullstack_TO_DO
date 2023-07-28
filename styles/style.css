@@ -14,6 +14,7 @@ body {
     height: 100vh;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
 }
   form {
     display: flex;
@@ -125,5 +126,12 @@ body {
 @keyframes blink {
   50% {
     border-color: transparent
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .container { 
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

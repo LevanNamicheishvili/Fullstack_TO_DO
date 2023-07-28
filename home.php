@@ -177,7 +177,7 @@ if ($result->num_rows > 0) {
                 echo "<li>{$taskNumber}. {$task['task_description']} 
                     <form action='home.php' method='post' style='display:inline;'>
                         <input type='hidden' name='task_id' value='{$task['id']}'>
-                        <button type='submit' name='delete_task'>Delete</button>
+                        <button type='submit' name='delete_task' class='delete-task'>Delete</button>
                     </form>
                 </li>";
             }
