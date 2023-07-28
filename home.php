@@ -131,7 +131,7 @@ if ($result->num_rows > 0) {
 <body>
     <header>
         <div class="logo"> 
-            <img src="./images/hacker.png" alt="logo">
+            <!-- <img src="./images/hacker.png" alt="logo"> -->
             <p>Hello, <?php echo $_SESSION['user_name']; ?></p>
         </div>
         <span>To Do App</span>

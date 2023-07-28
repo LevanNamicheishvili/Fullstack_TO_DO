@@ -44,7 +44,6 @@ span {
     background: #555;
     color: white;
     padding: 7px 37px;
-    border-radius: 8px;
 }
 .logoutdiv a:hover { 
     opacity: 0.7;
